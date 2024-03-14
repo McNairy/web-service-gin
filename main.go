@@ -3,10 +3,10 @@ package main
 import (
 	"net/http"
 
-	"github.com/McNairy/web-service-gin/docs"
+	docs "github.com/McNairy/web-service-gin/docs"
 	"github.com/gin-gonic/gin"
-	docs "github.com/go-project-name/docs"
-	"github.com/swaggo/gin-swagger"
+	swaggerfiles "github.com/swaggo/files"
+	ginSwagger "github.com/swaggo/gin-swagger"
 )
 
 type album struct {
@@ -22,7 +22,7 @@ var albums = []album{
 	{ID: "3", Title: "Sarah Vaughan and Clifford Brown", Artist: "Sarah Vaughan", Price: 39.99},
 }
 
-// @BasePath /
+// @BasePath /api/v1
 
 // AlbumsExample godoc
 // @Summary albums example
@@ -38,14 +38,19 @@ func main() {
 	router := gin.Default()
 
 	docs.SwaggerInfo.BasePath = "/docs"
-	router.GET("/docs/*any", ginSwagger.WrapHandler(swaggerfiles.Handler))
-	router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerfiles.Handler))
-	router.Run(":8080")
 
-	router.GET("/albums", getAlbums)
-	router.GET("/albums/:id", getAlbumById)
-	router.POST("/albums", postAlbums)
-	router.Run("localhost:8080")
+	v1 := router.Group("/api/v1")
+	{
+		albums := v1.Group("/albums")
+		{
+			albums.GET("/albums", getAlbums)
+			albums.GET("/albums/:id", getAlbumById)
+			albums.POST("/albums", postAlbums)
+		}
+	}
+
+	router.GET("/docs/*any", ginSwagger.WrapHandler(swaggerfiles.Handler))
+	router.Run(":8080")
 }
 
 func getAlbums(c *gin.Context) {
