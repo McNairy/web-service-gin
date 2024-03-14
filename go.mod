@@ -1,4 +1,4 @@
-module web-service-gin.michaelmcnairy.com
+module michaelmcnairy.com/McNairy/web-service-gin
 
 go 1.22.0
 
