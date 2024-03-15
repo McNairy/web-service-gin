@@ -5,7 +5,7 @@ import (
 
 	docs "github.com/McNairy/web-service-gin/docs"
 	"github.com/gin-gonic/gin"
-	files "github.com/swaggo/files"
+	swaggerfiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"
 )
 
@@ -22,7 +22,7 @@ var albums = []album{
 	{ID: "3", Title: "Sarah Vaughan and Clifford Brown", Artist: "Sarah Vaughan", Price: 39.99},
 }
 
-// @BasePath /
+// @BasePath /api/v1
 
 // AlbumsExample godoc
 // @Summary albums example
@@ -38,14 +38,19 @@ func main() {
 	router := gin.Default()
 
 	docs.SwaggerInfo.BasePath = "/docs"
-	router.GET("/docs/*any", ginSwagger.WrapHandler(files.Handler))
-	router.GET("/swagger/*any", ginSwagger.WrapHandler(files.Handler))
-	router.Run(":8080")
 
-	router.GET("/albums", getAlbums)
-	router.GET("/albums/:id", getAlbumById)
-	router.POST("/albums", postAlbums)
-	router.Run("localhost:8080")
+	v1 := router.Group("/api/v1")
+	{
+		albums := v1.Group("/albums")
+		{
+			albums.GET("/albums", getAlbums)
+			albums.GET("/albums/:id", getAlbumById)
+			albums.POST("/albums", postAlbums)
+		}
+	}
+
+	router.GET("/docs/*any", ginSwagger.WrapHandler(swaggerfiles.Handler))
+	router.Run(":8080")
 }
 
 func getAlbums(c *gin.Context) {

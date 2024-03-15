@@ -1,10 +1,18 @@
+<<<<<<< HEAD
 module github.com-McNairy/web-service-gin
+=======
+module github.com/McNairy/web-service-gin
+>>>>>>> 74cc5b097c2a4f9467d8850e2a3360f77fbf7723
 
 go 1.22.0
 
 require (
 	github.com/McNairy/web-service-gin v0.0.0-20240314141135-74cc5b097c2a
 	github.com/gin-gonic/gin v1.9.1
+<<<<<<< HEAD
+=======
+	github.com/swaggo/files v1.0.1
+>>>>>>> 74cc5b097c2a4f9467d8850e2a3360f77fbf7723
 	github.com/swaggo/gin-swagger v1.6.0
 	github.com/swaggo/swag v1.16.3
 )
