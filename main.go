@@ -3,10 +3,10 @@ package main
 import (
 	"net/http"
 
-	"github.com/McNairy/web-service-gin/docs"
+	docs "github.com/McNairy/web-service-gin/docs"
 	"github.com/gin-gonic/gin"
-	docs "github.com/go-project-name/docs"
-	"github.com/swaggo/gin-swagger"
+	files "github.com/swaggo/files"
+	ginSwagger "github.com/swaggo/gin-swagger"
 )
 
 type album struct {
@@ -38,8 +38,8 @@ func main() {
 	router := gin.Default()
 
 	docs.SwaggerInfo.BasePath = "/docs"
-	router.GET("/docs/*any", ginSwagger.WrapHandler(swaggerfiles.Handler))
-	router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerfiles.Handler))
+	router.GET("/docs/*any", ginSwagger.WrapHandler(files.Handler))
+	router.GET("/swagger/*any", ginSwagger.WrapHandler(files.Handler))
 	router.Run(":8080")
 
 	router.GET("/albums", getAlbums)
