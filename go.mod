@@ -3,7 +3,6 @@ module github.com/McNairy/web-service-gin
 go 1.22.0
 
 require (
-	github.com/McNairy/web-service-gin v0.0.0-20240314141135-74cc5b097c2a
 	github.com/gin-gonic/gin v1.9.1
 	github.com/swaggo/files v1.0.1
 	github.com/swaggo/gin-swagger v1.6.0

@@ -33,22 +33,13 @@ var albums = []album{
 // @Produce json
 // @Success 200 array album
 // @Router /albums [get]
-
 func main() {
 	router := gin.Default()
 
-	docs.SwaggerInfo.BasePath = "/docs"
-
-	v1 := router.Group("/api/v1")
-	{
-		albums := v1.Group("/albums")
-		{
-			albums.GET("/albums", getAlbums)
-			albums.GET("/albums/:id", getAlbumById)
-			albums.POST("/albums", postAlbums)
-		}
-	}
-
+	docs.SwaggerInfo.BasePath = "/"
+	router.GET("/albums", getAlbums)
+	router.GET("/albums/:id", getAlbumById)
+	router.POST("/albums", postAlbums)
 	router.GET("/docs/*any", ginSwagger.WrapHandler(swaggerfiles.Handler))
 	router.Run(":8080")
 }
