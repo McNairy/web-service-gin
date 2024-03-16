@@ -18,7 +18,7 @@ paths:
     get:
       consumes:
       - application/json
-      description: returns all albums
+      description: returns album by id
       produces:
       - application/json
       responses:
@@ -28,7 +28,23 @@ paths:
             items:
               $ref: '#/definitions/main.album'
             type: array
-      summary: get albums example
+      summary: get album by id
+      tags:
+      - albums
+    post:
+      consumes:
+      - application/json
+      description: create new album
+      produces:
+      - application/json
+      responses:
+        "301":
+          description: Moved Permanently
+          schema:
+            items:
+              $ref: '#/definitions/main.album'
+            type: array
+      summary: create new album
       tags:
       - albums
 swagger: "2.0"

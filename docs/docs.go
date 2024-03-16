@@ -17,7 +17,7 @@ const docTemplate = `{
     "paths": {
         "/albums": {
             "get": {
-                "description": "returns all albums",
+                "description": "returns album by id",
                 "consumes": [
                     "application/json"
                 ],
@@ -27,10 +27,34 @@ const docTemplate = `{
                 "tags": [
                     "albums"
                 ],
-                "summary": "get albums example",
+                "summary": "get album by id",
                 "responses": {
                     "200": {
                         "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/main.album"
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "description": "create new album",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "albums"
+                ],
+                "summary": "create new album",
+                "responses": {
+                    "301": {
+                        "description": "Moved Permanently",
                         "schema": {
                             "type": "array",
                             "items": {

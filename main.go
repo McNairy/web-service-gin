@@ -57,6 +57,15 @@ func getAlbums(c *gin.Context) {
 	c.IndentedJSON(http.StatusOK, albums)
 }
 
+// AlbumsExample godoc
+// @Summary create new album
+// @Schemes
+// @Description create new album
+// @Tags albums
+// @Accept json
+// @Produce json
+// @Success 301 array album
+// @Router /albums [post]
 func postAlbums(c *gin.Context) {
 	var newAlbum album
 
@@ -69,6 +78,15 @@ func postAlbums(c *gin.Context) {
 	c.IndentedJSON(http.StatusCreated, newAlbum)
 }
 
+// AlbumsExample godoc
+// @Summary get album by id
+// @Schemes
+// @Description returns album by id
+// @Tags albums
+// @Accept json
+// @Produce json
+// @Success 200 array album
+// @Router /albums [get]
 func getAlbumById(c *gin.Context) {
 	id := c.Param("id")
 
