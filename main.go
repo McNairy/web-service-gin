@@ -44,6 +44,15 @@ func main() {
 	router.Run(":8080")
 }
 
+// AlbumsExample godoc
+// @Summary get albums example
+// @Schemes
+// @Description returns all albums
+// @Tags albums
+// @Accept json
+// @Produce json
+// @Success 200 array album
+// @Router /albums [get]
 func getAlbums(c *gin.Context) {
 	c.IndentedJSON(http.StatusOK, albums)
 }
