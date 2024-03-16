@@ -1,5 +1,34 @@
-basePath: /
+basePath: /api/v1
+definitions:
+  main.album:
+    properties:
+      artist:
+        type: string
+      id:
+        type: string
+      price:
+        type: number
+      title:
+        type: string
+    type: object
 info:
   contact: {}
-paths: {}
+paths:
+  /albums:
+    get:
+      consumes:
+      - application/json
+      description: returns all albums
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/main.album'
+            type: array
+      summary: get albums example
+      tags:
+      - albums
 swagger: "2.0"
